@@ -4,56 +4,45 @@
 
 {% block content %}
 
-<h1>{{ title }}</h1>
-
-{# Slideshow #}
-<div id="image-slider" class="splide">
-	<div class="splide__track">
-		<ul class="splide__list">
-            {% for index,row in table.iterrows() %}
-                <li class="splide__slide">
-                    <img src="static/images/range.jpg">
-                    <div class="image_slider_txt">
-                        {{ row.car_brand}}, {{ row.car_model}}<br>
-                        {{ ((((((row.car_price)/100)*80)/12)|round(2))|string).split('.')[0] }},- /md<br>
-                        {{ row.car_mileage}} km<br>
-                        {{ row.car_model_year}}
-                    </div>
-                </li>
-            {% endfor %}
-		</ul>
-	</div>
-</div>
-
+<h1 style="text-align: center; margin-top: 50px;">{{ title }}</h1>
 <br>
-<div class="row">
-    <div class="col">
-    <h2>Hvad er flex leasing?</h2>
 
-    {# Lorem ipsum #}
-    <section>
-        <p>
-            {{ info_table.info_text[0] }}
-        </p>
-        <p>
-            {{ info_table.info_text[1] }}
-        </p>
-    </section>
-    </div>
+<h5>Spiller liste</h5>
+<p id="spillerliste"></p>
 
-    <div class="col">
-    <h2>Hvorfor vælge flex leasing?</h2>
-
-    {# Lorem ipsum #}
-    <section>
-        <p>
-            {{ info_table.info_text[0] }}
-        </p>
-        <p>
-            {{ info_table.info_text[1] }}
-        </p>
-    </section>
-    </div>
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    {% for player in playerlist %}
+    <li class="list-group-item">{{ player }}</li>
+    {% endfor %}
+  </ul>
 </div>
+<br>
+
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Tilføj spiller" id="spiller" name="spiller">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" onclick="add_player_button()">+</button>
+  </div>
+</div>
+<button class="btn btn-outline-secondary" onclick="window.location.href='/spil/'">Start spil</button>
+
+
+
+
+
+<script>
+
+var spillere = [];
+
+function add_player_button() {
+  spillere.push(document.getElementById("spiller").value);
+  document.getElementById("spillerliste").innerHTML = spillere;
+  document.getElementById("spiller").value = '';
+}
+
+</script>
+
 
 {% endblock %}

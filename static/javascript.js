@@ -12,3 +12,8 @@ document.addEventListener( 'DOMContentLoaded', function () {
         'autoplay': true
 	} ).mount();
 } );
+
+$("#MyButton").click(function() {
+    alert('Confirm to refresh alert messages.');
+    $("#refreshDivID").load("#refreshDivID .reloaded-divs > *");
+}); 

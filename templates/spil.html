@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+{% set active_page = "forside" %} 
+{% block title %}{{title}}{% endblock %} 
+
+{% block content %}
+
+<br><br>
+
+<h1 style="text-align: center; margin-top: 50px;">Lucky Luk siger:</h1>
+
+<br><br><br><br><br><br><br>
+
+<div class="center">
+  <h4 class="center_text">{{ ((questionlist|random)|replace('XXX',(playerlist|random)|title))|replace('YYY',(playerlist|random)|title) }}</h4>
+</div>
+
+<div>
+  <button onClick="refreshPage()" class="center_bottom_button pretty_button">Refresh page</button>
+</div>
+
+<script>
+function refreshPage(){
+    window.location.reload();
+} 
+</script>
+
+
+{% endblock %}
