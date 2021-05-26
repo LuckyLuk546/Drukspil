@@ -55,3 +55,7 @@ def get_info_table():
 # Get new cars
 def get_newest_cars(): 
     return pd.read_sql(f'SELECT TOP 5 * FROM [dbo].cars ORDER BY car_date_added', get_con())
+
+# Get all questions
+def get_all_questions(): 
+    return pd.read_sql(f'SELECT * FROM [dbo].questions', get_con())

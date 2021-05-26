@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, session, redirect
 from datetime import date, datetime, timedelta
 from flask_mobility import Mobility
 from flask_mobility.decorators import mobile_template
+import pandas as pd
 import dataconnection
 
 app = Flask(__name__)
@@ -32,20 +33,14 @@ def index(template):
 @mobile_template('{mobile/}spil.html')
 def spil(template):
 
-    today = date.today()
-    yesterday = today - timedelta(days=1)
-    weekday = date.today().weekday()
-    info_table = dataconnection.get_info_table().fillna(-1)
-
-    table = dataconnection.get_newest_cars().fillna(-1)
-    table[['car_price']] = table[['car_price']].astype(int) # Fjerner .0
+    questiontable = dataconnection.get_all_questions().fillna(-1)
 
     if 'playerlist' not in session:
         return redirect(url_for('index'))
     playerlist = session['playerlist']
-    questionlist = ['XXX skal give en lussing til YYY', 'XXX må give to shots ud', 'Fælles skål!', 'XXX skal læse en hel bog imens han/hun står på hovedet :)', 'XXX skal fortælle en hemmelighed MAX 2 personer i selvskabet kender']
+    questionlist = questiontable['question'].values.tolist()
 
-    return render_template("spil.html", info_table=info_table, today=today, yesterday=yesterday, weekday=weekday, table=table, playerlist=playerlist, questionlist=questionlist, title='Drukspil')
+    return render_template("spil.html", playerlist=playerlist, questionlist=questionlist, title='Drukspil')
 
 @app.route("/tospillere/<string:playeret>/<string:playerto>")
 @mobile_template('{mobile/}index.html')
