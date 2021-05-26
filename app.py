@@ -54,7 +54,7 @@ def tospillere(template,playeret,playerto):
     session['playerlist'] = [playeret, playerto]
     playerlist = session['playerlist']
 
-    return redirect(url_for('index'))
+    return redirect(url_for('spil'))
 
 @app.route("/trespillere/<string:playeret>/<string:playerto>/<string:playertre>")
 @mobile_template('{mobile/}index.html')
@@ -63,7 +63,7 @@ def trespillere(template,playeret,playerto,playertre):
     session['playerlist'] = [playeret, playerto, playertre]
     playerlist = session['playerlist']
 
-    return redirect(url_for('index'))
+    return redirect(url_for('spil'))
 
 @app.route("/qrtest")
 @mobile_template('{mobile/}qrtest.html')
