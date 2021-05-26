@@ -26,7 +26,7 @@
     <button class="btn btn-outline-secondary" onclick="add_player_button()">+</button>
   </div>
 </div>
-<button class="btn btn-outline-secondary" onclick="window.location.href='/spil/'">Start spil</button>
+<button id="start_btn" class="btn btn-outline-secondary" onclick="">Start spil</button>
 
 
 
@@ -40,6 +40,9 @@ function add_player_button() {
   spillere.push(document.getElementById("spiller").value);
   document.getElementById("spillerliste").innerHTML = spillere;
   document.getElementById("spiller").value = '';
+  document.getElementById("start_btn").onclick = () => {
+    window.location.href='/trespillere/'+spillere.join("/");
+  };
 }
 
 </script>
