@@ -8,6 +8,10 @@ body{
     min-height: 100vh;
 }
 
+.home_btn {
+    padding: 15px;
+}
+
 .add_player_button {
     background-color: white;
     border-radius: 5px;

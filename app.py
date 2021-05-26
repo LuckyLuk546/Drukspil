@@ -25,9 +25,10 @@ def index(template):
 
     if 'playerlist' not in session:
         session['playerlist'] = []
-    playerlist = session['playerlist']
+    if 'playerlist' in session:
+        session.pop('playerlist', None)
 
-    return render_template("index.html", info_table=info_table, today=today, yesterday=yesterday, weekday=weekday, table=table, playerlist=playerlist, title='Drukspil')
+    return render_template("index.html", info_table=info_table, today=today, yesterday=yesterday, weekday=weekday, table=table, title='Drukspil')
 
 @app.route("/spil")
 @mobile_template('{mobile/}spil.html')
